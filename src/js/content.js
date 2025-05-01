@@ -45,7 +45,8 @@ function getComputedStyles(element) {
     color: styles.color,
     letterSpacing: styles.letterSpacing,
     textTransform: styles.textTransform,
-    fontStyle: styles.fontStyle
+    fontStyle: styles.fontStyle,
+    textAlign: styles.textAlign
   };
 }
 
@@ -151,7 +152,12 @@ function showTooltip(element, event) {
     <span class="tag">&lt;${element.tagName.toLowerCase()}&gt;</span>
     <div class="property">
       <span class="property-name">Font Family</span>
-      <span class="property-value">${styles.fontFamily.split(',')[0]}</span>
+      <span class="property-value">
+        <div class="font-stack">
+          <div class="primary-font">${styles.fontFamily.split(',')[0]}</div>
+          <div class="fallback-fonts">${styles.fontFamily}</div>
+        </div>
+      </span>
     </div>
     <div class="property">
       <span class="property-name">Size</span>
@@ -164,6 +170,22 @@ function showTooltip(element, event) {
     <div class="property">
       <span class="property-name">Line Height</span>
       <span class="property-value">${formatSizeValue(styles.lineHeight)}</span>
+    </div>
+    <div class="property">
+      <span class="property-name">Letter Spacing</span>
+      <span class="property-value">${formatSizeValue(styles.letterSpacing)}</span>
+    </div>
+    <div class="property">
+      <span class="property-name">Text Transform</span>
+      <span class="property-value">${styles.textTransform}</span>
+    </div>
+    <div class="property">
+      <span class="property-name">Font Style</span>
+      <span class="property-value">${styles.fontStyle}</span>
+    </div>
+    <div class="property">
+      <span class="property-name">Text Align</span>
+      <span class="property-value">${styles.textAlign}</span>
     </div>
     <div class="property">
       <span class="property-name">Color</span>
@@ -350,6 +372,27 @@ function handleScroll() {
   }
 }
 
+// Function to show a toast notification
+function showFontCheckerToast(message) {
+  // Remove any existing toast
+  const oldToast = document.querySelector('.font-checker-toast');
+  if (oldToast) oldToast.remove();
+
+  const toast = document.createElement('div');
+  toast.className = 'font-checker-toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  // Force reflow to enable transition
+  void toast.offsetWidth;
+  toast.classList.add('font-checker-toast-show');
+
+  setTimeout(() => {
+    toast.classList.remove('font-checker-toast-show');
+    setTimeout(() => toast.remove(), 400);
+  }, 1800);
+}
+
 // Function to handle messages
 function handleMessage(request, sender, sendResponse) {
   // Only handle messages in the main frame
@@ -362,9 +405,11 @@ function handleMessage(request, sender, sendResponse) {
     sendResponse({ results: analyzedElements });
   } else if (request.action === 'showOverlays') {
     enableHoverInspection();
+    showFontCheckerToast('Font Checker ON');
     sendResponse({ success: true });
   } else if (request.action === 'removeOverlays') {
     disableHoverInspection();
+    showFontCheckerToast('Font Checker OFF');
     sendResponse({ success: true });
   }
 }

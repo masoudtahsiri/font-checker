@@ -128,4 +128,26 @@
   border-radius: 4px;
   font-size: 12px;
   background-color: white;
+}
+
+.font-checker-toast {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(33, 150, 243, 0.97);
+  color: #fff;
+  padding: 10px 28px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 10050;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.font-checker-toast.font-checker-toast-show {
+  opacity: 1;
 } 
