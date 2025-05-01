@@ -149,7 +149,10 @@ function showTooltip(element, event) {
 
   const styles = getComputedStyles(element);
   tooltip.innerHTML = `
-    <span class="tag">&lt;${element.tagName.toLowerCase()}&gt;</span>
+    <div class="tag-row">
+      <span class="tag">&lt;${element.tagName.toLowerCase()}&gt;</span>
+      <span class="copy-hint">Copy: Shift + 🖱️</span>
+    </div>
     <div class="property">
       <span class="property-name">Font Family</span>
       <span class="property-value">
@@ -372,7 +375,7 @@ function handleScroll() {
   }
 }
 
-// Function to show a toast notification
+// Function to show a toast notification (supports bottom right for copy)
 function showFontCheckerToast(message, state) {
   // Remove any existing toast
   const oldToast = document.querySelector('.font-checker-toast');
@@ -382,6 +385,7 @@ function showFontCheckerToast(message, state) {
   toast.className = 'font-checker-toast';
   if (state === 'on') toast.classList.add('font-checker-toast-on');
   if (state === 'off') toast.classList.add('font-checker-toast-off');
+  if (state === 'copied') toast.classList.add('font-checker-toast-copied');
   toast.textContent = message;
   document.body.appendChild(toast);
 
@@ -391,9 +395,46 @@ function showFontCheckerToast(message, state) {
 
   setTimeout(() => {
     toast.classList.remove('font-checker-toast-show');
-    setTimeout(() => toast.remove(), 400);
+    setTimeout(() => toast.remove(), state === 'copied' ? 1500 : 1800);
   }, 1800);
 }
+
+// Function to copy computed font CSS to clipboard
+function copyFontCSS(element) {
+  const styles = getComputedStyles(element);
+  const tag = `<${element.tagName.toLowerCase()}>`;
+  const className = element.className && element.className.trim() ? `Class: ${element.className.trim()}` : '';
+  const text = element.textContent.trim();
+  const lines = [tag];
+  if (className) {
+    lines.push(className, ''); // Add blank line after class
+  }
+  lines.push(`Text: ${text}`, '');
+  lines.push(
+    `font-family: ${styles.fontFamily};`,
+    `font-size: ${styles.fontSize};`,
+    `font-weight: ${styles.fontWeight};`,
+    `line-height: ${styles.lineHeight};`,
+    `letter-spacing: ${styles.letterSpacing};`,
+    `text-transform: ${styles.textTransform};`,
+    `font-style: ${styles.fontStyle};`,
+    `text-align: ${styles.textAlign};`,
+    `color: ${styles.color};`
+  );
+  const css = lines.join('\n');
+  navigator.clipboard.writeText(css).then(() => {
+    showFontCheckerToast('✅ CSS copied to clipboard', 'copied');
+  });
+}
+
+// Listen for Shift+Click on the inspected element
+function handleShiftClick(event) {
+  if (event.shiftKey && event.button === 0 && currentHoveredElement && event.target === currentHoveredElement) {
+    event.preventDefault();
+    copyFontCSS(currentHoveredElement);
+  }
+}
+document.addEventListener('mousedown', handleShiftClick, true);
 
 // Function to handle messages
 function handleMessage(request, sender, sendResponse) {

@@ -92,6 +92,31 @@
   font-family: monospace;
 }
 
+.font-checker-tooltip .tag-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.font-checker-tooltip .copy-hint {
+  font-size: 11px;
+  color: #ccc;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  display: block;
+  font-family: inherit;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.font-checker-tooltip .copy-hint-label {
+  color: #ccc;
+  font-weight: 600;
+  margin-right: 2px;
+}
+
 .font-checker-control-panel {
   position: fixed;
   top: 20px;
@@ -166,4 +191,27 @@
 .font-checker-toast.font-checker-toast-off {
   background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
   color: #fff;
+}
+
+.font-checker-toast.font-checker-toast-copied {
+  bottom: 32px;
+  top: auto;
+  right: 32px;
+  left: auto;
+  background: #23272f;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 10px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  z-index: 2147483647;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  text-align: center;
+}
+
+.font-checker-toast.font-checker-toast-copied.font-checker-toast-show {
+  opacity: 1;
 } 
