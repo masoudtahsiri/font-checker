@@ -59,6 +59,21 @@
   font-family: monospace;
 }
 
+.font-checker-tooltip .color-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.font-checker-tooltip .color-value {
+  display: inline-flex;
+  align-items: center;
+}
+
 .font-checker-control-panel {
   position: fixed;
   top: 20px;

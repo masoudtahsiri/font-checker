@@ -140,7 +140,10 @@ function showTooltip(element, event) {
     </div>
     <div class="property">
       <span class="property-name">Color</span>
-      <span class="property-value">${styles.color}</span>
+      <span class="property-value">
+        <span class="color-swatch" style="background-color: ${styles.color}"></span>
+        ${styles.color}
+      </span>
     </div>
   `;
 
