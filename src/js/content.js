@@ -373,13 +373,15 @@ function handleScroll() {
 }
 
 // Function to show a toast notification
-function showFontCheckerToast(message) {
+function showFontCheckerToast(message, state) {
   // Remove any existing toast
   const oldToast = document.querySelector('.font-checker-toast');
   if (oldToast) oldToast.remove();
 
   const toast = document.createElement('div');
   toast.className = 'font-checker-toast';
+  if (state === 'on') toast.classList.add('font-checker-toast-on');
+  if (state === 'off') toast.classList.add('font-checker-toast-off');
   toast.textContent = message;
   document.body.appendChild(toast);
 
@@ -405,11 +407,11 @@ function handleMessage(request, sender, sendResponse) {
     sendResponse({ results: analyzedElements });
   } else if (request.action === 'showOverlays') {
     enableHoverInspection();
-    showFontCheckerToast('Font Checker ON');
+    showFontCheckerToast('Font Checker ON', 'on');
     sendResponse({ success: true });
   } else if (request.action === 'removeOverlays') {
     disableHoverInspection();
-    showFontCheckerToast('Font Checker OFF');
+    showFontCheckerToast('Font Checker OFF', 'off');
     sendResponse({ success: true });
   }
 }
