@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="128" height="128" rx="24" fill="#f5f6fa"/>
-  <text x="28" y="88" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="bold" fill="#222" filter="url(#shadow)">A</text>
-  <defs>
-    <filter id="shadow" x="0" y="0" width="200%" height="200%">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.18"/>
-    </filter>
-  </defs>
+  <circle cx="64" cy="64" r="60" fill="#2196F3"/>
+  <text x="32" y="92" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="bold" fill="white">A</text>
+  <!-- Magnifying glass: large, thick outline, overlapping the A -->
   <g>
-    <circle cx="88" cy="88" r="24" fill="#4FC3F7" stroke="#1976D2" stroke-width="4"/>
-    <ellipse cx="88" cy="82" rx="10" ry="5" fill="#fff" fill-opacity="0.45"/>
-    <circle cx="88" cy="88" r="14" fill="#f5f6fa"/>
-    <rect x="104" y="104" width="16" height="6" rx="3" transform="rotate(45 104 104)" fill="#1976D2"/>
+    <circle cx="76" cy="76" r="32" fill="#fff" fill-opacity="0.7" stroke="#1976D2" stroke-width="7"/>
+    <rect x="98" y="98" width="22" height="8" rx="4" transform="rotate(45 98 98)" fill="#1976D2"/>
   </g>
 </svg> 
