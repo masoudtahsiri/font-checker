@@ -74,6 +74,24 @@
   align-items: center;
 }
 
+.font-checker-tooltip .font-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.font-checker-tooltip .primary-font {
+  color: #2196F3;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.font-checker-tooltip .fallback-fonts {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-family: monospace;
+}
+
 .font-checker-control-panel {
   position: fixed;
   top: 20px;
