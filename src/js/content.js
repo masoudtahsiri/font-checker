@@ -7,6 +7,33 @@ let tooltip = null;
 let currentHoveredElement = null;
 let mutationObserver = null;
 
+// Function to convert pixel value to rem
+function pxToRem(pxValue) {
+  // Extract numeric value from string (e.g., "16px" -> 16)
+  const px = parseFloat(pxValue);
+  if (isNaN(px)) return null;
+  
+  // Convert to rem (16px = 1rem)
+  const rem = px / 16;
+  
+  // Round to 1 decimal place and remove trailing zeros
+  return Number(rem.toFixed(1)).toString();
+}
+
+// Function to format size value with rem
+function formatSizeValue(value) {
+  if (!value) return value;
+  
+  // Handle line-height values that might be unitless
+  if (value === 'normal') return value;
+  
+  // Convert to rem if it's a pixel value
+  const rem = pxToRem(value);
+  if (rem === null) return value;
+  
+  return `${value} (${rem}rem)`;
+}
+
 // Function to get computed styles for an element
 function getComputedStyles(element) {
   const styles = window.getComputedStyle(element);
@@ -128,7 +155,7 @@ function showTooltip(element, event) {
     </div>
     <div class="property">
       <span class="property-name">Size</span>
-      <span class="property-value">${styles.fontSize}</span>
+      <span class="property-value">${formatSizeValue(styles.fontSize)}</span>
     </div>
     <div class="property">
       <span class="property-name">Weight</span>
@@ -136,7 +163,7 @@ function showTooltip(element, event) {
     </div>
     <div class="property">
       <span class="property-name">Line Height</span>
-      <span class="property-value">${styles.lineHeight}</span>
+      <span class="property-value">${formatSizeValue(styles.lineHeight)}</span>
     </div>
     <div class="property">
       <span class="property-name">Color</span>
