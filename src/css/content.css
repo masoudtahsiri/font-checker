@@ -1,0 +1,98 @@
+.font-checker-highlight {
+  outline: 2px solid rgba(33, 150, 243, 0.5) !important;
+  background-color: rgba(33, 150, 243, 0.05) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.font-checker-icon {
+  position: absolute;
+  font-size: 14px;
+  color: rgba(33, 150, 243, 0.7);
+  cursor: pointer;
+  z-index: 10000;
+  pointer-events: auto;
+  transition: color 0.2s;
+  user-select: none;
+}
+
+.font-checker-icon:hover {
+  color: rgba(33, 150, 243, 1);
+}
+
+.font-checker-tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 10001;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.font-checker-tooltip .property {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.font-checker-tooltip .property-name {
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 12px;
+}
+
+.font-checker-tooltip .property-value {
+  color: white;
+  font-weight: 500;
+}
+
+.font-checker-tooltip .tag {
+  color: #2196F3;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+  font-family: monospace;
+}
+
+.font-checker-control-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10002;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.font-checker-control-panel button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.font-checker-control-panel button:hover {
+  background-color: #1976D2;
+}
+
+.font-checker-control-panel select {
+  padding: 6px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: white;
+} 
