@@ -1,6 +1,6 @@
-# Font Consistency Checker Chrome Extension
+# PeekFont Chrome Extension
 
-A Chrome extension that helps developers and designers maintain consistent typography across web pages. The extension provides real-time font analysis and inspection capabilities.
+PeekFont helps developers and designers instantly inspect and analyze font styles on any web page. The extension provides real-time font analysis and inspection capabilities.
 
 ## Features
 
@@ -19,7 +19,7 @@ A Chrome extension that helps developers and designers maintain consistent typog
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/font-checker.git
+git clone https://github.com/yourusername/peekfont.git
 ```
 
 2. Open Chrome and navigate to `chrome://extensions/`
@@ -30,7 +30,7 @@ git clone https://github.com/yourusername/font-checker.git
 
 ## Usage
 
-1. Click the extension icon in your Chrome toolbar to activate font inspection
+1. Click the PeekFont extension icon in your Chrome toolbar to activate font inspection
 2. Hover over any text element on the page to see its font properties
 3. The tooltip will show detailed font information
 4. Click the extension icon again to deactivate inspection
@@ -45,7 +45,7 @@ The extension is built with vanilla JavaScript and uses:
 ## Project Structure
 
 ```
-font-checker/
+peekfont/
 ├── src/
 │   ├── manifest.json
 │   ├── popup.html

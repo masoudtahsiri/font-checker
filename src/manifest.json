@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Font Consistency Checker",
+  "name": "PeekFont",
   "version": "1.0",
-  "description": "Analyze and maintain consistent font usage across web pages",
+  "description": "PeekFont: Instantly inspect and analyze font styles on any web page.",
   "permissions": [
     "activeTab",
     "scripting"
