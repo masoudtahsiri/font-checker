@@ -97,7 +97,7 @@ function hasText(el) {
   
   // Special handling for buttons and inputs
   if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
-    return el.value || el.textContent || el.innerText;
+    return el.value || el.textContent || el.innerText || el.placeholder;
   }
   
   // For other elements, check text content
@@ -119,9 +119,12 @@ function isInspectable(el) {
     return isVisible(el) && hasText(el);
   }
 
+  // Skip parent elements that contain interactive elements only if they don't have their own text
+  const hasInteractiveChildren = el.querySelector(interactiveTags.join(','));
+  if (hasInteractiveChildren && !hasText(el)) return false;
+
   // For text elements, only check if they're visible and have text
   if (isVisible(el) && hasText(el)) {
-    // Don't skip if parent has text - this allows nested text elements
     return true;
   }
 
