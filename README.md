@@ -1,74 +1,101 @@
-# PeekFont Chrome Extension
+# PeekFont - Font Inspector Chrome Extension
 
-PeekFont helps developers and designers instantly inspect and analyze font styles on any web page. The extension provides real-time font analysis and inspection capabilities.
+PeekFont is a powerful Chrome extension that helps developers and designers instantly inspect and analyze font styles on any web page. With real-time font analysis, detailed font information display, and easy CSS copying, PeekFont makes font inspection effortless.
 
 ## Features
 
-- 🔍 Automatic font analysis of all text elements on the page
-- 🖱️ Hover-to-inspect functionality for font properties
-- 📊 Detailed font information display including:
-  - Font Family
-  - Font Size
-  - Font Weight
-  - Line Height
-  - Color
-- 🎯 Support for both static and dynamically loaded content
-- 🧹 Clean, non-intrusive interface
+- 🔍 **Real-time Font Inspection**: Hover over any text to instantly see its font details
+- 📋 **Detailed Font Information**:
+  - Font family with fallback fonts
+  - Font size (in px and rem)
+  - Font weight
+  - Line height
+  - Letter spacing
+  - Text transform
+  - Font style
+  - Text alignment
+  - Color (with visual swatch)
+- 📋 **Easy CSS Copying**: Double-press Shift (⇧⇧) to copy the font CSS
+- 🎯 **Smart Element Detection**: Automatically identifies text elements while ignoring non-text elements
+- 🎨 **Beautiful UI**: Clean, modern interface with smooth animations
+- ⚡ **Performance Optimized**: Lightweight and fast, with minimal impact on page performance
 
 ## Installation
 
-1. Clone this repository:
-```bash
-git clone https://github.com/yourusername/peekfont.git
-```
-
-2. Open Chrome and navigate to `chrome://extensions/`
-
-3. Enable "Developer mode" in the top right
-
-4. Click "Load unpacked" and select the `src` directory from this repository
+1. Visit the [Chrome Web Store](https://chrome.google.com/webstore) (coming soon)
+2. Click "Add to Chrome"
+3. Confirm the installation
 
 ## Usage
 
-1. Click the PeekFont extension icon in your Chrome toolbar to activate font inspection
-2. Hover over any text element on the page to see its font properties
-3. The tooltip will show detailed font information
-4. Click the extension icon again to deactivate inspection
+1. Click the PeekFont icon in your Chrome toolbar to enable font inspection
+2. Hover over any text on the page to see its font details
+3. Double-press Shift (⇧⇧) to copy the font CSS
+4. Click the icon again to disable font inspection
+
+## Keyboard Shortcuts
+
+- **⇧⇧** (Double Shift): Copy font CSS of the currently hovered element
 
 ## Development
 
-The extension is built with vanilla JavaScript and uses:
-- Event delegation for efficient event handling
-- MutationObserver for dynamic content detection
-- Chrome Extension APIs for integration
+### Prerequisites
 
-## Project Structure
+- Node.js (v14 or higher)
+- Chrome browser (v88 or higher)
+
+### Building from Source
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/masoudtahsiri/font-checker.git
+   cd font-checker
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Build the extension:
+   ```bash
+   npm run build
+   ```
+
+4. Load the extension in Chrome:
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `dist` directory
+
+### Project Structure
 
 ```
-peekfont/
+font-checker/
 ├── src/
-│   ├── manifest.json
-│   ├── popup.html
-│   ├── css/
-│   │   └── content.css
 │   ├── js/
-│   │   ├── content.js
-│   │   └── popup.js
-│   └── icons/
-│       ├── icon16.png
-│       ├── icon48.png
-│       └── icon128.png
+│   │   ├── background.js    # Background service worker
+│   │   └── content.js       # Content script
+│   ├── css/
+│   │   └── content.css      # Styles for the extension
+│   ├── icons/              # Extension icons
+│   └── manifest.json       # Extension manifest
+├── dist/                   # Built extension
 └── README.md
 ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+Copyright © 2025 Refact, LLC. All rights reserved.
+
+## Support
+
+For support, please visit [refact.co](https://refact.co) or open an issue in the GitHub repository.
+
+## Privacy
+
+PeekFont does not collect any user data. All font inspection is performed locally in your browser. 

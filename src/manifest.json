@@ -2,7 +2,8 @@
   "manifest_version": 3,
   "name": "PeekFont",
   "version": "1.0",
-  "description": "PeekFont: Instantly inspect and analyze font styles on any web page.",
+  "description": "PeekFont helps developers and designers instantly inspect and analyze font styles on any web page. Features include real-time font analysis, detailed font information display, and easy CSS copying.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "activeTab",
     "scripting",
@@ -16,10 +17,12 @@
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
-    }
+    },
+    "default_title": "PeekFont - Font Inspector"
   },
   "background": {
-    "service_worker": "js/background.js"
+    "service_worker": "js/background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -40,5 +43,8 @@
       "resources": ["css/*", "js/*"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "homepage_url": "https://refact.co",
+  "author": "Refact",
+  "copyright": "Copyright © 2025 Refact, LLC"
 } 
