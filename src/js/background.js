@@ -8,12 +8,16 @@ chrome.action.onClicked.addListener(async (tab) => {
     // Toggle the state
     await chrome.storage.local.set({ [`tab_${tab.id}`]: !isActive });
     
-    // Send message to content script
-    await chrome.tabs.sendMessage(tab.id, {
-      action: isActive ? 'removeOverlays' : 'showOverlays'
-    });
+    // Try to send message to content script, but don't throw if it fails
+    try {
+      await chrome.tabs.sendMessage(tab.id, {
+        action: isActive ? 'removeOverlays' : 'showOverlays'
+      });
+    } catch {
+      // Silently ignore if content script isn't ready
+    }
   } catch (error) {
-    console.error('Error handling extension click:', error);
+    // Silently ignore any other errors
   }
 });
 
@@ -21,8 +25,8 @@ chrome.action.onClicked.addListener(async (tab) => {
 chrome.tabs.onRemoved.addListener(async (tabId) => {
   try {
     await chrome.storage.local.remove(`tab_${tabId}`);
-  } catch (error) {
-    console.error('Error cleaning up tab state:', error);
+  } catch {
+    // Silently ignore cleanup errors
   }
 });
 

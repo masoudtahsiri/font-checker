@@ -32,7 +32,7 @@ async function initializeState() {
       enableHoverInspection();
     }
   } catch (error) {
-    console.error('Failed to sync state:', error);
+    // Silently handle state sync errors
   }
 }
 
@@ -293,8 +293,6 @@ function analyzeFonts() {
   if (window.self !== window.top) {
     return analyzedElements;
   }
-
-  console.log('Analyzing fonts on page...');
   
   // Get all elements in the body
   const allElements = document.body.getElementsByTagName('*');
@@ -303,7 +301,6 @@ function analyzeFonts() {
   // Convert HTMLCollection to Array and analyze elements
   Array.from(allElements).forEach(analyzeElement);
 
-  console.log(`Found ${analyzedElements.length} text elements`);
   return analyzedElements;
 }
 
@@ -471,16 +468,15 @@ function handleMessage(request, sender, sendResponse) {
     return;
   }
 
-  console.log('Received message:', request.action);
   if (request.action === 'getResults') {
     sendResponse({ results: analyzedElements });
   } else if (request.action === 'showOverlays') {
     enableHoverInspection();
-    showFontCheckerToast('Font Checker ON', 'on');
+    showFontCheckerToast('PeekFont ON', 'on');
     sendResponse({ success: true });
   } else if (request.action === 'removeOverlays') {
     disableHoverInspection();
-    showFontCheckerToast('Font Checker OFF', 'off');
+    showFontCheckerToast('PeekFont OFF', 'off');
     sendResponse({ success: true });
   }
 }
@@ -497,7 +493,6 @@ function initialize() {
   }
   isInitialized = true;
 
-  console.log('Content script loaded');
   analyzeFonts();
 
   // Add message listener if not already added

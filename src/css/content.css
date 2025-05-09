@@ -178,7 +178,7 @@
 }
 
 .font-checker-toast.font-checker-toast-on {
-  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
   color: #fff;
   font-size: 16px;
   font-weight: 600;
