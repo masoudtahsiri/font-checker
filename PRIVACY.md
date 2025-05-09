@@ -49,6 +49,7 @@ We may update this Privacy Policy from time to time. We will notify you of any c
 ## Contact Us
 
 If you have any questions about this Privacy Policy, please contact us at:
+- Email: [dev@refact.co](mailto:dev@refact.co)
 - Website: [refact.co](https://refact.co)
 - GitHub: [github.com/masoudtahsiri/font-checker](https://github.com/masoudtahsiri/font-checker)
 

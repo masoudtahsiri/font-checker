@@ -94,8 +94,11 @@ Copyright © 2025 Refact, LLC. All rights reserved.
 
 ## Support
 
-For support, please visit [refact.co](https://refact.co) or open an issue in the GitHub repository.
+For support, please contact us at:
+- Email: [dev@refact.co](mailto:dev@refact.co)
+- Website: [refact.co](https://refact.co)
+- GitHub: [github.com/masoudtahsiri/font-checker](https://github.com/masoudtahsiri/font-checker)
 
 ## Privacy
 
-PeekFont does not collect any user data. All font inspection is performed locally in your browser. 
+PeekFont does not collect any user data. All font inspection is performed locally in your browser. For more information, please read our [Privacy Policy](PRIVACY.md). 
