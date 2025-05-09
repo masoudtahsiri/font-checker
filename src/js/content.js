@@ -6,6 +6,23 @@ let messageHandlers = new Set();
 let tooltip = null;
 let currentHoveredElement = null;
 let mutationObserver = null;
+let lastShiftPressTime = 0;
+const DOUBLE_SHIFT_THRESHOLD = 500; // milliseconds
+
+// Function to handle double Shift detection
+function handleKeyDown(event) {
+  if (event.key === 'Shift') {
+    const currentTime = Date.now();
+    if (currentTime - lastShiftPressTime < DOUBLE_SHIFT_THRESHOLD) {
+      // Double Shift detected
+      if (currentHoveredElement) {
+        event.preventDefault();
+        copyFontCSS(currentHoveredElement);
+      }
+    }
+    lastShiftPressTime = currentTime;
+  }
+}
 
 // Initialize state synchronization
 async function initializeState() {
@@ -169,7 +186,7 @@ function showTooltip(element, event) {
   tooltip.innerHTML = `
     <div class="tag-row">
       <span class="tag">&lt;${element.tagName.toLowerCase()}&gt;</span>
-      <span class="copy-hint">Copy: Shift + 🖱️</span>
+      <span class="copy-hint">Copy: ⇧⇧</span>
     </div>
     <div class="property">
       <span class="property-name">Font Family</span>
@@ -317,6 +334,7 @@ function enableHoverInspection() {
   document.body.addEventListener('mouseleave', handleMouseLeave, true);
   document.body.addEventListener('mousemove', handleMouseMove, true);
   window.addEventListener('scroll', handleScroll, { passive: true });
+  document.addEventListener('keydown', handleKeyDown);
 
   // Set up mutation observer
   mutationObserver = new MutationObserver(handleMutations);
@@ -332,6 +350,7 @@ function disableHoverInspection() {
   document.body.removeEventListener('mouseleave', handleMouseLeave, true);
   document.body.removeEventListener('mousemove', handleMouseMove, true);
   window.removeEventListener('scroll', handleScroll);
+  document.removeEventListener('keydown', handleKeyDown);
   
   if (mutationObserver) {
     mutationObserver.disconnect();
@@ -444,15 +463,6 @@ function copyFontCSS(element) {
     showFontCheckerToast('✅ CSS copied to clipboard', 'copied');
   });
 }
-
-// Listen for Shift+Click on the inspected element
-function handleShiftClick(event) {
-  if (event.shiftKey && event.button === 0 && currentHoveredElement && event.target === currentHoveredElement) {
-    event.preventDefault();
-    copyFontCSS(currentHoveredElement);
-  }
-}
-document.addEventListener('mousedown', handleShiftClick, true);
 
 // Function to handle messages
 function handleMessage(request, sender, sendResponse) {

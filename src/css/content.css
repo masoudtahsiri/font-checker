@@ -111,12 +111,6 @@
   margin-bottom: 0;
 }
 
-.font-checker-tooltip .copy-hint-label {
-  color: #ccc;
-  font-weight: 600;
-  margin-right: 2px;
-}
-
 .font-checker-control-panel {
   position: fixed;
   top: 20px;
