@@ -8,15 +8,33 @@ chrome.action.onClicked.addListener(async (tab) => {
     // Toggle the state
     await chrome.storage.local.set({ [`tab_${tab.id}`]: !isActive });
     
-    // Try to send message to content script, but don't throw if it fails
+    // Try to send message to content script
     try {
       await chrome.tabs.sendMessage(tab.id, {
         action: isActive ? 'removeOverlays' : 'showOverlays'
       });
     } catch {
-      // Silently ignore if content script isn't ready
+      // If content script isn't ready, inject it and show reload message
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+          const toast = document.createElement('div');
+          toast.className = 'font-checker-toast font-checker-toast-reload';
+          toast.textContent = 'Please reload the page to use PeekFont';
+          document.body.appendChild(toast);
+          
+          // Force reflow to enable transition
+          void toast.offsetWidth;
+          toast.classList.add('font-checker-toast-show');
+          
+          setTimeout(() => {
+            toast.classList.remove('font-checker-toast-show');
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }
+      });
     }
-  } catch (error) {
+  } catch {
     // Silently ignore any other errors
   }
 });

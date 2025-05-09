@@ -230,4 +230,28 @@
 
 .font-checker-toast.font-checker-toast-copied.font-checker-toast-show {
   opacity: 1;
+}
+
+.font-checker-toast.font-checker-toast-reload {
+  background: #1a73e8;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Segoe UI', 'Inter', 'Roboto', Arial, sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  padding: 14px 28px;
+  z-index: 2147483647;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.font-checker-toast.font-checker-toast-reload.font-checker-toast-show {
+  opacity: 1;
 } 
