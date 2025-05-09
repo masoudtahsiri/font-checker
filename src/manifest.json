@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "PeekFont",
   "version": "1.0",
-  "description": "PeekFont helps developers and designers instantly inspect and analyze font styles on any web page. Features include real-time font analysis, detailed font information display, and easy CSS copying.",
+  "description": "Instantly inspect and analyze font styles on any web page. See font details, copy CSS, and identify fonts with a simple hover.",
   "minimum_chrome_version": "88",
   "permissions": [
     "activeTab",
