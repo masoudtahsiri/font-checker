@@ -7,6 +7,21 @@ let tooltip = null;
 let currentHoveredElement = null;
 let mutationObserver = null;
 
+// Initialize state synchronization
+async function initializeState() {
+  try {
+    const response = await chrome.runtime.sendMessage({ action: 'getState' });
+    if (response && response.isActive) {
+      enableHoverInspection();
+    }
+  } catch (error) {
+    console.error('Failed to sync state:', error);
+  }
+}
+
+// Initialize when the content script loads
+initializeState();
+
 // Function to convert pixel value to rem
 function pxToRem(pxValue) {
   // Extract numeric value from string (e.g., "16px" -> 16)

@@ -5,7 +5,8 @@
   "description": "PeekFont: Instantly inspect and analyze font styles on any web page.",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
     "<all_urls>"
