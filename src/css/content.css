@@ -100,19 +100,46 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .font-checker-tooltip .copy-hint {
-  font-size: 11px;
-  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(33, 150, 243, 0.1);
+  border-radius: 6px;
+  font-size: 13px;
+  color: rgba(33, 150, 243, 1);
   font-weight: 500;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-  display: block;
-  font-family: inherit;
   white-space: nowrap;
-  margin-bottom: 0;
+  margin-left: auto;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+.font-checker-tooltip .copy-hint:hover {
+  background: rgba(33, 150, 243, 0.15);
+  border-color: rgba(33, 150, 243, 0.3);
+  transform: translateY(-1px);
+}
+
+.font-checker-tooltip .copy-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.font-checker-tooltip .tag {
+  color: #2196F3;
+  font-weight: 600;
+  font-family: monospace;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .font-checker-control-panel {
@@ -211,6 +238,33 @@
   align-items: center;
   gap: 10px;
   padding: 14px 32px;
+}
+
+.font-checker-toast.font-checker-toast-copied {
+  animation: pulseAndSlide 0.5s ease-in-out;
+  background: #23272f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  padding: 12px 28px;
+  border-radius: 8px;
+}
+
+@keyframes pulseAndSlide {
+  0% { 
+    transform: scale(1) translateY(0);
+    opacity: 0;
+  }
+  20% { 
+    transform: scale(1.08) translateY(-12px);
+    opacity: 1;
+  }
+  40% { 
+    transform: scale(1.08) translateY(-12px);
+  }
+  100% { 
+    transform: scale(1) translateY(0);
+  }
 }
 
 .font-checker-toast.font-checker-toast-copied {

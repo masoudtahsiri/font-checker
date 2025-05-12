@@ -9,12 +9,25 @@ let mutationObserver = null;
 let lastShiftPressTime = 0;
 const DOUBLE_SHIFT_THRESHOLD = 500; // milliseconds
 
-// Function to handle double Shift detection
+// Detect operating system
+const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+const modifierKey = isMac ? '⌘' : 'Ctrl';
+
+// Function to handle keyboard events
 function handleKeyDown(event) {
+  // Check for platform-specific modifier + C combination
+  if (currentHoveredElement && 
+      ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) && 
+      event.key.toLowerCase() === 'c') {
+    event.preventDefault();
+    copyFontCSS(currentHoveredElement);
+    return;
+  }
+
+  // Keep your existing double-shift handler if you want
   if (event.key === 'Shift') {
     const currentTime = Date.now();
     if (currentTime - lastShiftPressTime < DOUBLE_SHIFT_THRESHOLD) {
-      // Double Shift detected
       if (currentHoveredElement) {
         event.preventDefault();
         copyFontCSS(currentHoveredElement);
@@ -183,10 +196,17 @@ function showTooltip(element, event) {
   }
 
   const styles = getComputedStyles(element);
+  const copyShortcut = isMac ? '⌘+C' : 'Ctrl+C';
+  
   tooltip.innerHTML = `
     <div class="tag-row">
       <span class="tag">&lt;${element.tagName.toLowerCase()}&gt;</span>
-      <span class="copy-hint">Copy: ⇧⇧</span>
+      <span class="copy-hint">
+        <svg class="copy-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+        </svg>
+        ${copyShortcut}
+      </span>
     </div>
     <div class="property">
       <span class="property-name">Font Family</span>
@@ -457,6 +477,24 @@ function copyFontCSS(element) {
   );
   const css = lines.join('\n');
   navigator.clipboard.writeText(css).then(() => {
+    // Update the tooltip to show copied state
+    if (tooltip && tooltip.style.display !== 'none') {
+      const copyHint = tooltip.querySelector('.copy-hint');
+      if (copyHint) {
+        const originalHTML = copyHint.innerHTML;
+        copyHint.innerHTML = '<svg class="copy-icon" viewBox="0 0 24 24"><path fill="#4CAF50" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> Copied!';
+        copyHint.style.backgroundColor = 'rgba(76, 175, 80, 0.15)';
+        copyHint.style.color = '#4CAF50';
+        
+        setTimeout(() => {
+          copyHint.innerHTML = originalHTML;
+          copyHint.style.backgroundColor = '';
+          copyHint.style.color = '';
+        }, 1000);
+      }
+    }
+    
+    // Also show the toast
     showFontCheckerToast('✅ CSS copied to clipboard', 'copied');
   });
 }
