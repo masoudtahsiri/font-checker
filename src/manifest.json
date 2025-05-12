@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PeekFont",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Instantly inspect and analyze font styles on any web page. See font details, copy CSS, and identify fonts with a simple hover.",
   "minimum_chrome_version": "88",
   "permissions": [
