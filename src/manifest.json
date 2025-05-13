@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "PeekFont",
   "version": "1.0.2",
-  "description": "PeekFont: Live font inspector! Hover to ID fonts & styles. Copy element details & key CSS instantly. Keeps pages interactive. Pro typography tool.",
+  "description": "Live font inspector! Hover to identify fonts & styles. Copy element details & key CSS instantly. Keeps pages interactive. Pro typography tool.",
   "minimum_chrome_version": "88",
   "permissions": [
     "activeTab",
