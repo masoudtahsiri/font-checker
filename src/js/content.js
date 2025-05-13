@@ -449,8 +449,8 @@ function showFontCheckerToast(message, state) {
 
   setTimeout(() => {
     toast.classList.remove('font-checker-toast-show');
-    setTimeout(() => toast.remove(), state === 'copied' ? 1500 : 1800);
-  }, 1800);
+    setTimeout(() => toast.remove(), 2200);
+  }, 2200);
 }
 
 // Function to copy computed font CSS to clipboard
