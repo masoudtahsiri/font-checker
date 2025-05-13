@@ -6,8 +6,6 @@ let messageHandlers = new Set();
 let tooltip = null;
 let currentHoveredElement = null;
 let mutationObserver = null;
-let lastShiftPressTime = 0;
-const DOUBLE_SHIFT_THRESHOLD = 500; // milliseconds
 
 // Detect operating system
 const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
@@ -21,19 +19,6 @@ function handleKeyDown(event) {
       event.key.toLowerCase() === 'c') {
     event.preventDefault();
     copyFontCSS(currentHoveredElement);
-    return;
-  }
-
-  // Keep your existing double-shift handler if you want
-  if (event.key === 'Shift') {
-    const currentTime = Date.now();
-    if (currentTime - lastShiftPressTime < DOUBLE_SHIFT_THRESHOLD) {
-      if (currentHoveredElement) {
-        event.preventDefault();
-        copyFontCSS(currentHoveredElement);
-      }
-    }
-    lastShiftPressTime = currentTime;
   }
 }
 

@@ -15,9 +15,7 @@ PeekFont is a powerful Chrome extension that helps developers and designers inst
   - Font style
   - Text alignment
   - Color (with visual swatch)
-- 📋 **Easy CSS Copying**: 
-  - Double-press Shift (⇧⇧) to copy the font CSS
-  - Or use ⌘+C (Mac) / Ctrl+C (Windows/Linux) while hovering
+- 📋 **Easy CSS Copying**: Use ⌘+C (Mac) / Ctrl+C (Windows/Linux) while hovering to copy the font CSS
 - 🎯 **Smart Element Detection**: Automatically identifies text elements while ignoring non-text elements
 - 🎨 **Beautiful UI**: Clean, modern interface with smooth animations
 - ⚡ **Performance Optimized**: Lightweight and fast, with minimal impact on page performance
@@ -32,9 +30,7 @@ PeekFont is a powerful Chrome extension that helps developers and designers inst
 
 1. Click the PeekFont icon in your Chrome toolbar to enable font inspection
 2. Hover over any text on the page to see its font details
-3. Copy the font CSS using either:
-   - Double-press Shift (⇧⇧)
-   - Or use ⌘+C (Mac) / Ctrl+C (Windows/Linux) while hovering
+3. Use ⌘+C (Mac) / Ctrl+C (Windows/Linux) while hovering to copy the font CSS
 4. Click the icon again to disable font inspection
 
 ## Keyboard Shortcuts
