@@ -24,7 +24,7 @@ async function setOriginalIcon(tabId) {
 
 // Helper to set the greyed out icon
 function setGreyedOutIcon(tabId) {
-  setIconWithOpacity(tabId, 0.5);
+  setIconWithOpacity(tabId, 0.45);
 }
 
 // Track the active state for each tab using chrome.storage.local
