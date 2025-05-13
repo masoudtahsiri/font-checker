@@ -484,13 +484,15 @@ function copyFontCSS(element) {
         const originalHTML = copyHint.innerHTML;
         copyHint.innerHTML = '<svg class="copy-icon" viewBox="0 0 24 24"><path fill="#4CAF50" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> Copied!';
         copyHint.style.backgroundColor = 'rgba(76, 175, 80, 0.15)';
-        copyHint.style.color = '#4CAF50';
+        copyHint.style.color = '#388e3c'; // slightly darker green
+        copyHint.style.fontWeight = '700';
         
         setTimeout(() => {
           copyHint.innerHTML = originalHTML;
           copyHint.style.backgroundColor = '';
           copyHint.style.color = '';
-        }, 1000);
+          copyHint.style.fontWeight = '';
+        }, 1500);
       }
     }
     
