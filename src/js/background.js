@@ -1,5 +1,5 @@
-// Helper to draw icon with a dot overlay
-async function setIconWithDot(tabId, color) {
+// Helper to set icon with opacity
+async function setIconWithOpacity(tabId, opacity) {
   const iconUrl = chrome.runtime.getURL('icons/icon48.png');
   const response = await fetch(iconUrl);
   const blob = await response.blob();
@@ -8,39 +8,23 @@ async function setIconWithDot(tabId, color) {
   const canvas = new OffscreenCanvas(48, 48);
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, 48, 48);
+  
+  // Set global alpha for the entire icon
+  ctx.globalAlpha = opacity;
   ctx.drawImage(bitmap, 0, 0, 48, 48);
-
-  // Draw the dot in the bottom right corner (center at 37, 37, radius 12)
-  ctx.beginPath();
-  ctx.arc(37, 37, 12, 0, 2 * Math.PI, false); // Center at (37, 37), radius 12
-  ctx.fillStyle = color;
-  ctx.shadowColor = '#fff';
-  ctx.shadowBlur = 2;
-  ctx.fill();
 
   const imageData = ctx.getImageData(0, 0, 48, 48);
   chrome.action.setIcon({ imageData, tabId });
 }
 
-// Helper to set the original icon (no dot)
+// Helper to set the original icon (full opacity)
 async function setOriginalIcon(tabId) {
-  const iconUrl = chrome.runtime.getURL('icons/icon48.png');
-  const response = await fetch(iconUrl);
-  const blob = await response.blob();
-  const bitmap = await createImageBitmap(blob);
-
-  const canvas = new OffscreenCanvas(48, 48);
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, 48, 48);
-  ctx.drawImage(bitmap, 0, 0, 48, 48);
-
-  const imageData = ctx.getImageData(0, 0, 48, 48);
-  chrome.action.setIcon({ imageData, tabId });
+  setIconWithOpacity(tabId, 1.0);
 }
 
-// Helper to ensure the red dot is set
-function ensureRedDot(tabId) {
-  setIconWithDot(tabId, '#F44336');
+// Helper to set the greyed out icon
+function setGreyedOutIcon(tabId) {
+  setIconWithOpacity(tabId, 0.5);
 }
 
 // Track the active state for each tab using chrome.storage.local
@@ -56,9 +40,9 @@ chrome.action.onClicked.addListener(async (tab) => {
     
     // Update icon based on new state
     if (newState) {
-      setOriginalIcon(tab.id); // No dot (ON)
+      setOriginalIcon(tab.id); // Full opacity (ON)
     } else {
-      setIconWithDot(tab.id, '#F44336'); // Red dot (OFF)
+      setGreyedOutIcon(tab.id); // Greyed out (OFF)
     }
     
     // Try to send message to content script
@@ -112,9 +96,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-// Always set the red dot icon by default for new tabs
+// Always set the greyed out icon by default for new tabs
 chrome.tabs.onCreated.addListener((tab) => {
-  ensureRedDot(tab.id);
+  setGreyedOutIcon(tab.id);
 });
 
 // Set the icon for all tab updates
@@ -122,9 +106,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   chrome.storage.local.get(`tab_${tabId}`).then((result) => {
     const isActive = result[`tab_${tabId}`] || false;
     if (isActive) {
-      setOriginalIcon(tabId); // No dot (ON)
+      setOriginalIcon(tabId); // Full opacity (ON)
     } else {
-      ensureRedDot(tabId); // Red dot (OFF)
+      setGreyedOutIcon(tabId); // Greyed out (OFF)
     }
   });
 });
